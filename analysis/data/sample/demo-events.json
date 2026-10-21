@@ -1,0 +1,48 @@
+[
+  {
+    "eventId": "evt-demo-001",
+    "studyId": "narrative-sketch-demo",
+    "participantId": "demo-001",
+    "eventType": "participant-started",
+    "occurredAt": "2025-01-01T10:00:00Z",
+    "data": {}
+  },
+  {
+    "eventId": "evt-demo-002",
+    "studyId": "narrative-sketch-demo",
+    "participantId": "demo-001",
+    "eventType": "route-visited",
+    "occurredAt": "2025-01-01T10:00:05Z",
+    "data": {
+      "route": "/intro"
+    }
+  },
+  {
+    "eventId": "evt-demo-003",
+    "studyId": "narrative-sketch-demo",
+    "participantId": "demo-001",
+    "eventType": "answer-action",
+    "occurredAt": "2025-01-01T10:02:00Z",
+    "data": {
+      "mode": "task",
+      "taskIndex": 0,
+      "itemId": "demo-linear-1",
+      "expectedAnswer": "Linear",
+      "answer": "Linear",
+      "reasoning": "A fictional example response.",
+      "confidence": 4,
+      "action": "confirm"
+    }
+  },
+  {
+    "eventId": "evt-demo-004",
+    "studyId": "narrative-sketch-demo",
+    "participantId": "demo-001",
+    "eventType": "study-feedback",
+    "occurredAt": "2025-01-01T10:04:00Z",
+    "data": {
+      "feedback": "Synthetic feedback for testing only.",
+      "activityFrequency": 2
+    }
+  }
+]

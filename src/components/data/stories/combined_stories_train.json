@@ -1,0 +1,104 @@
+[
+  {
+    "name": "demo-linear-1",
+    "section": "sample",
+    "structure": "Linear",
+    "seed": 1,
+    "description": "Sample training explanation for the Linear pattern.",
+    "chapters": [
+      {
+        "id": "linear-1",
+        "title": "Update 1",
+        "time_period": [
+          "2025-01-05"
+        ],
+        "themes": [
+          "Theme 1"
+        ],
+        "entity": [
+          "community group"
+        ],
+        "content": "A sample event begins for Linear. This fictional example describes a small community project and is included to demonstrate the task format."
+      },
+      {
+        "id": "linear-2",
+        "title": "Update 2",
+        "time_period": [
+          "2025-01-10"
+        ],
+        "themes": [
+          "Theme 2"
+        ],
+        "entity": [
+          "local council"
+        ],
+        "content": "The community responds to the Linear event. This fictional example describes a small community project and is included to demonstrate the task format."
+      },
+      {
+        "id": "linear-3",
+        "title": "Update 3",
+        "time_period": [
+          "2025-01-15"
+        ],
+        "themes": [
+          "Theme 3"
+        ],
+        "entity": [
+          "community group"
+        ],
+        "content": "The example concludes with the Linear event. This fictional example describes a small community project and is included to demonstrate the task format."
+      }
+    ]
+  },
+  {
+    "name": "demo-arch-2",
+    "section": "sample",
+    "structure": "Arch",
+    "seed": 2,
+    "description": "Sample training explanation for the Arch pattern.",
+    "chapters": [
+      {
+        "id": "arch-1",
+        "title": "Update 1",
+        "time_period": [
+          "2025-02-05"
+        ],
+        "themes": [
+          "Theme 1"
+        ],
+        "entity": [
+          "community group"
+        ],
+        "content": "A sample event begins for Arch. This fictional example describes a small community project and is included to demonstrate the task format."
+      },
+      {
+        "id": "arch-2",
+        "title": "Update 2",
+        "time_period": [
+          "2025-02-10"
+        ],
+        "themes": [
+          "Theme 2"
+        ],
+        "entity": [
+          "local council"
+        ],
+        "content": "The community responds to the Arch event. This fictional example describes a small community project and is included to demonstrate the task format."
+      },
+      {
+        "id": "arch-3",
+        "title": "Update 3",
+        "time_period": [
+          "2025-02-15"
+        ],
+        "themes": [
+          "Theme 3"
+        ],
+        "entity": [
+          "community group"
+        ],
+        "content": "The example concludes with the Arch event. This fictional example describes a small community project and is included to demonstrate the task format."
+      }
+    ]
+  }
+]

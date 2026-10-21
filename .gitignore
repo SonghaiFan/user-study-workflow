@@ -1,0 +1,33 @@
+# Dependencies and build output
+node_modules/
+dist/
+dist-ssr/
+*.log
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+*.local
+
+# Research data must stay outside version control unless explicitly approved
+data/raw/
+data/processed/
+data/exports/
+exports/
+*.csv
+*.xlsx
+*.sav
+*.rds
+*.sqlite
+*.db
+
+# Python and notebooks
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Editors and OS
+.DS_Store
+.vscode/
+.idea/
