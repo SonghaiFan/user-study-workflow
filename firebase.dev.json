@@ -1,0 +1,8 @@
+{
+  "firestore": { "rules": "firestore.dev.rules" },
+  "hosting": {
+    "public": "dist",
+    "ignore": ["firebase.dev.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [{ "source": "**", "destination": "/index.html" }]
+  }
+}

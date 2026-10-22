@@ -8,7 +8,7 @@ Write down the research question, target population, inclusion/exclusion criteri
 
 ## 2. Prepare participant materials
 
-Replace `public/markdown/consent.md`, `intro.md`, `about.md`, and `motifs.md`. Explain the activity, risks, benefits, data collected, withdrawal process, retention, contacts, and ethics approval as required by the institution. The included consent file is only a checklist-shaped placeholder; it is not approved wording.
+Set `study.consent` and block instructions in your study plugin. Plugins may also provide introduction and feedback components. Explain the activity, risks, benefits, data collected, withdrawal process, retention, contacts, and ethics approval as required by the institution. The included Demo consent is only a placeholder; it is not approved wording.
 
 ## 3. Configure the participant journey
 
@@ -16,7 +16,7 @@ The current reference flow is:
 
 `start → consent acknowledgement → introduction → materials → training → tasks → feedback → completion`
 
-The routes are in `src/components/MyRoutesConfig.tsx`. Sample tasks are JSON files under `src/components/data/stories/`. Keep task content, correct answers, and facilitator-only hints out of participant-visible pages unless the protocol requires them.
+The shared runner is in `src/study/StudyRunner.tsx`. Edit the single Demo component and question configuration under `src/studies/demo/`; see `docs/plugins.md`. Its normal sequence is consent → screen compatibility check → introduction/video guide → training with retries → training-to-task transition → quizzes → block feedback → study feedback → completion. Debug jumps are available only in Dev mode.
 
 ## 4. Pilot without real participants
 
@@ -24,7 +24,7 @@ Use fictional IDs and synthetic answers. Check that consent is required, the tas
 
 ## 5. Select and secure a real data store
 
-`src/utils/studyStore.ts` writes to browser local storage solely to make the demo runnable without credentials or a service. Replace it with an approved backend adapter before a real study. Define who can read and export records, how participants are represented, how failures/retries work, how duplicates are handled, and how long data is retained. Never place privileged credentials in a browser bundle.
+`src/study/store.ts` writes to browser local storage solely to make the demo runnable without credentials or a service. Formal mode uses `src/study/cloudStore.ts`; configure and validate its deployment before a real study. Define who can read and export records, how participants are represented, how failures/retries work, how duplicates are handled, and how long data is retained. Never place privileged credentials in a browser bundle.
 
 ## 6. Export and analyse
 

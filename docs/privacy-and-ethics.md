@@ -7,7 +7,7 @@ This is an engineering checklist, not legal advice or ethics approval. Follow yo
 - Obtain the required ethics review and use the approved participant information and consent process.
 - Specify data items, purpose, lawful/approved basis, access roles, retention period, deletion process, storage region, and any processors.
 - Minimise identifiers. Keep recruitment-platform IDs, contact details, consent records, and research responses separate where the protocol requires it.
-- Use a secured server-side data store with least-privilege access and tested export/deletion procedures. The included browser-local demo is not a real study backend.
+- Use a secured server-side data store with least-privilege access and tested export/deletion procedures. Dev data must remain separate from formal data. The included Firebase adapter and rules still need configuration and deployment-specific validation before collection.
 - Check that public sample files, screenshots, logs, notebooks, and issue reports contain no participant data.
 
 ## During the study

@@ -1,62 +1,62 @@
-# User Study Workflow
+# User Study Workflow Template
 
-A reference implementation for planning, running, and analysing a small browser-based user study. It combines a participant-facing study flow with a lightweight event schema, a local demo store, and a Python export/validation step.
+A single **Demo** built around **Study → Block → Quiz**. Replace the left React component and configure the right questions; consent, timing, validation, progress, storage and completion stay in the framework. The 70/30 UI, input controls and Debug Panel are extracted from `news_text_visualisation`.
 
-This repository is a **workflow reference**, not a validated research platform. Its sample study and consent text are fictional placeholders. The included browser store is for local demonstration only; it is not appropriate for real participant recruitment or data collection.
-
-## Workflow at a glance
-
-```mermaid
-flowchart LR
-  A[Design study] --> B[Prepare reviewed materials]
-  B --> C[Pilot with synthetic participants]
-  C --> D[Run participant workflow]
-  D --> E[Export approved events]
-  E --> F[Validate and analyse]
-  F --> G[Retain or delete by protocol]
-```
-
-## What the workflow covers
-
-1. Define the study question, participant journey, tasks, and measures.
-2. Prepare and obtain review of study-specific participant information and consent.
-3. Configure the participant-facing pages and task materials.
-4. Pilot the flow using synthetic participants and check completion, accessibility, and event capture.
-5. Choose and secure an approved data store before recruiting real participants.
-6. Export and validate events, then analyse them with a documented and reproducible script.
-7. Retain or destroy data according to the approved protocol.
-
-## Run the local demo
-
-Requirements: Node.js and npm. Copy `.env.example` to `.env.local` only if you want to change the local demo study ID or show facilitator answer hints.
+## Develop
 
 ```bash
 npm ci
 npm run dev
 ```
 
-Open the local URL printed by Vite. Read and acknowledge the placeholder consent text, complete the training and sample tasks, then download the synthetic demo participant's event JSON on the completion page. The data stays in this browser's local storage until cleared.
+The root URL opens the only Demo: consent → device compatibility check (800 × 600 minimum) → introduction and tutorial video placeholder → training (answer checking and retries) → main block introduction → quizzes → block feedback → study feedback → completion. A saved session resumes its current step; **New test / Consent** in Debug starts a fresh run. There is no example selector. Previous `?example=...` links also open this Demo.
 
-To validate the analysis example:
+Edit these two files for a new experiment:
+
+- `src/studies/demo/InteractivePlaceholder.tsx`: left interactive component, currently a simple click counter.
+- `src/studies/demo/study.ts`: blocks and quizzes. Supports single choice, multiple choice, drag ranking, drag pairing, rating and text.
+
+`src/studies/demo/index.tsx` binds them with `defineStudy({ study, Component })`. No framework changes are required. See [component contract](docs/plugins.md).
+
+## Two runtime modes
+
+| | Dev / Debug | Study |
+|---|---|---|
+| Selection | `npm run dev` or explicit `VITE_RUN_MODE=dev` | production build default or `VITE_RUN_MODE=study` |
+| UI | Original floating DEBUG panel | Participant flow only |
+| Navigation | Jump to any step; start another test | Follow configured sequence |
+| Identity | Synthetic test ID; ignores recruitment URL IDs | Requires Prolific's three launch IDs |
+| Storage | Local test namespace; optional separate test Firebase | Formal Firebase only; no local fallback |
+| Completion | Test JSON export | Recruitment return link after server save |
+
+The debug panel can test storage access and turn test persistence off (memory-only session). Toggling storage or starting a new test preserves previous saved tests and creates a new session. Refresh resumes saved answers, but not draft answers. Use one tab per local test session.
+
+Mode is build configuration, never a URL switch. Block `mode: training/task` is independent of runtime `dev/study`.
+
+## Formal study setup
+
+Copy `.env.example` to your ignored local environment file and configure your own Firebase web app, consent text/version and HTTPS completion URL. Enable Anonymous Auth and deploy `firestore.rules` to the **formal** Firebase project. Production participant records are owner-scoped in `studySessions/{authUid}/sessions/{key}`.
 
 ```bash
-python3 -m unittest discover -s analysis/tests -v
-python3 analysis/process_events.py analysis/data/sample/demo-events.json --output /tmp/study-events.csv
+npm run build:study
+# After configuring your own Firebase project:
+# firebase deploy --project YOUR_FORMAL_PROJECT --only firestore:rules,hosting
 ```
 
-## Repository map
+For cloud testing use a **different Firebase project**, `VITE_DEV_STORAGE=cloud`, and only the `VITE_DEV_FIREBASE_*` settings. Deploy `firestore.dev.rules` using `firebase.dev.json`. This project accepts `testSessions` and rejects formal collection writes; formal rules reject test collection writes. Never deploy both rule sets into the same project.
 
-- `src/` and `public/`: participant-facing reference application and fictional task materials.
-- `analysis/`: event validator/normalizer, test fixture, and analysis workflow notes.
-- `docs/`: study lifecycle, data schema, and privacy/ethics checklist.
+No Firebase project credentials were copied and no cloud resources were deployed by this extraction. Missing formal settings stop the participant flow. A successful build does not establish a working cloud deployment. See [deployment and storage details](docs/runtime-modes.md).
 
-## Before adapting this for a real study
+## Validate
 
-- Replace every sample prompt, task, consent statement, recruitment identifier, completion route, and retention rule with study-specific reviewed material.
-- Obtain institutional ethics review where required. This repository does not supply legal or ethics approval.
-- Replace `src/utils/studyStore.ts` with a server-side, access-controlled storage adapter. Do not deploy the local-storage demo as a real collection endpoint.
-- Review the event schema for data minimisation. Avoid names, email addresses, or other direct identifiers unless the approved protocol requires them.
-- Configure retention, access, deletion, backups, incident response, and any cross-border hosting decisions.
-- Run a full pilot and verify exports and analysis before recruiting.
+```bash
+npm run build
+npm run lint:starter
+npm test
+python3 -m unittest discover -s analysis/tests -v
+python3 analysis/process_events.py path/to/events.json --output /tmp/study-events.csv
+```
 
-Start from the [study plan template](study-template/study-plan-template.md). See [the workflow guide](docs/workflow.md), [the data schema](docs/data-schema.md), and [the privacy and ethics checklist](docs/privacy-and-ethics.md).
+Exports include `run_mode` so test data can be excluded from analysis. Earlier records without that field are `unknown`, never inferred as formal data.
+
+The original training transition, feedback slides and completion-code UI are configurable in `study.ts`. See [shared-flow audit](docs/flow-audit.md) for the complete comparison. Dev can preview Finish directly without answering tasks.

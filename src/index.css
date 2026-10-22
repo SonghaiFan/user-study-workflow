@@ -1,11 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-img {
-  @apply mx-auto shadow-md rounded;
-}
-
-.markdown-body {
-  @apply xl:w-1/2 w-full m-auto mt-5 p-10 px-2 sm:px-20;
-}

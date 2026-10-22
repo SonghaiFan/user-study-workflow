@@ -31,3 +31,7 @@ __pycache__/
 .DS_Store
 .vscode/
 .idea/
+
+# Local browser verification
+output/playwright/
+.playwright-cli/
